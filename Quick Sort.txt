@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+int partitionArray(int input[], int low, int high) {
+    int pivot = input[low];
+    int i = low;
+    int j = high;
+
+    while (i < j) {
+        while (input[i] <= pivot && i <= high) {
+            i++;
+        }
+
+        while (input[j] > pivot && j >= low) {
+            j--;
+        }
+        if (i < j) swap(input[i], input[j]);
+    }
+    swap(input[low], input[j]);
+    return j;
+}
+
+void quickSort(int input[], int low, int high) {
+    if (low < high) {
+        int pIndex = partitionArray(input, low, high);
+        quickSort(input, low, pIndex - 1);
+        quickSort(input, pIndex + 1, high);
+    }
+}
